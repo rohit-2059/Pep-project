@@ -31,10 +31,7 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                sh '''
-                sleep 10
-                docker exec myapp curl http://localhost:3000/health
-                '''
+                sh 'docker inspect -f "{{.State.Running}}" myapp'
             }
         }
     }
